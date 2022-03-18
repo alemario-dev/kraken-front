@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col">
+    <div class="card shadow rounded-pill">
+      <div class="card-header border-0 bg-white">
+        <div class="row">
+          <div class="col">
+            <ng-content select="kraken-table-header"></ng-content>
+          </div>
+          <div class="col pagSize justify-content-end align-items-center">
+            <ng-content select="kraken-actions-buttons"></ng-content>
+
+            <a class="btn btn-sm btn-icon-only text-secondary hoverButton" (click)="export()" placement="top" ngbTooltip="Descargar" *ngIf="ShowDownload">
+              <i class="fas fa-download"></i>
+            </a>
+            <a class="btn btn-sm btn-icon-only text-secondary hoverButton" (click)="showFilters()" placement="top" ngbTooltip="Busqueda">
+                <i class="fas fa-search"></i>
+            </a>
+            <div ngbDropdown placement="bottom-right">
+              <a class="btn btn-sm btn-icon-only text-secondary hoverButton" ngbDropdownToggle placement="top" ngbTooltip="Columnas a mostrar">
+                <i class="fas fa-eye"></i>
+              </a>
+              <div ngbDropdownMenu class="dropdown-menu-arrow" style="padding-top: 1rem;">
+                <div class="drodown-item" *ngFor="let column of colummnsInfo.groupSettingSearch;" style="padding-left: 1rem;">
+                  <div class="custom-control custom-checkbox mb-3">
+                    <input class="custom-control-input" type="checkbox" name="{{'Show'+column.id}}" [(ngModel)]="column.show" id="{{'Show'+column.id}}">
+                    <label class="custom-control-label" for="{{'Show'+column.id}}">{{column.title}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <small class="text-secondary" style="margin-right: 10px;">
+                Mostrar
+            </small>
+            <input (change)="refresh()" (keyup)="refresh()" style="width: 60px; display: inline;" type="number" class="form-control hoverButton" id="sizePage" [(ngModel)]="sizePage" >
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid" style="min-height: 2rem;" *ngIf="!colummnsInfo?.settings?.selectRows&&!colummnsInfo?.settings?.onPickRow">
+        <hr class="my-1">
+        <div class="d-flex flex-row">
+          <div class="my-1 mx-2">
+            <i  *ngIf="colummnsInfo.TypeSelected=='all'" class="fas fa-check-square fa-lg" (click)="selectAllrows()"></i>
+            <i  *ngIf="colummnsInfo.TypeSelected=='none'" class="fas fa-square fa-lg" (click)="selectAllrows()"></i>
+            <i *ngIf="colummnsInfo.TypeSelected=='partial'" class="fas fa-minus-square fa-lg" (click)="selectAllrows()"></i>
+          </div>
+
+          <div class="d-flex" [ngClass]="{'slide-in-left': colummnsInfo.groupSelected.length }" *ngIf="colummnsInfo?.groupSelected?.length">
+            <ng-content select="[krakenOptions]"></ng-content>
+            <a class="btn btn-sm btn-icon-only" (click)="exportPartial()" placement="top" ngbTooltip="ExportarExcel" *ngIf="!colummnsInfo?.settings?.showDownloadPartial">
+              <i class="fa-solid fa-file-excel fa-lg"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <ng-content select="kraken-table-columns"></ng-content>
+      <div class="card-footer py-4">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <small class="text-primary">Mostrando pagina {{currentPage}} de {{totalPages}}</small>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 text-right">
+            <kraken-table-footer [currentPage]="currentPage" [totalPages]="totalPages" (goToPage)="gotToPage($event)"></kraken-table-footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

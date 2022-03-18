@@ -1,0 +1,64 @@
+.pagSize {
+    display: flex;
+}
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading img {
+    width: 100%;
+    max-width: 500px;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+table th, table td {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.ng-select.form-control {
+    background-color: transparent;
+    border: none;
+    height: auto;
+    padding: 0;
+    max-width: 100%;
+}
+.ng-select.form-control.is-invalid ::ng-deep .ng-select-container {
+    min-height: 0px;
+    border: solid 1px #fb6340;
+}
+
+.hoverButton:hover{
+    box-shadow: 0 50px 100px rgb(50 50 93 / 10%), 0 15px 35px rgb(50 50 93 / 15%), 0 5px 15px rgb(0 0 0 / 10%);
+    position: relative;
+    animation: HoverAnimation 0.1s both;
+  }
+  
+@keyframes HoverAnimation {
+0% { top: 0; }
+100% { top: -5px; }
+}
+
+.cursiva{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.slide-in-left {
+	animation: slide-in-left 0.2s;
+}
+
+ @keyframes slide-in-left {
+    0% {
+      transform: translateX(-10px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  

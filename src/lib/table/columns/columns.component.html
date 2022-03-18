@@ -1,0 +1,114 @@
+<div class="table-responsive" style="min-height: 20rem;">
+    <table class="table align-items-center table-flush table-hover" [ngClass]="{'table-hover': settings?.onPickRow}">
+      <thead class="thead-light">
+        <tr>
+          <th *ngIf="!settings?.selectRows&&!settings?.onPickRow"></th>
+          <ng-container *ngFor="let item of groupSettingSearch">
+            <th scope="col" *ngIf="item.show">
+              <div class="d-flex">
+                <span style="width: 100%;">
+                  {{item.title}}
+                </span>
+                <div *ngIf="item.canSort" class="text-right">
+                  <i *ngIf="item.sort == 0"  (click)="sort(item)" class="fas fa-sort"></i>
+                  <i *ngIf="item.sort == 1"  (click)="sort(item)" class="fas fa-sort-up"></i>
+                  <i *ngIf="item.sort == -1" (click)="sort(item)" class="fas fa-sort-down"></i>
+                </div>
+              </div>
+            </th>
+          </ng-container>
+          <th class="flex-fill" *ngIf="settings?.actionsButtons?.length>0">Acciones</th>
+          <th class="flex-fill" *ngIf="settings?.options?.length>0"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- MENU DE BUSQUEDA -->
+        <tr *ngIf="showSearch">
+          <td></td>
+          <ng-container *ngFor="let item of groupSettingSearch">
+            <ng-container *ngIf="!item.hideSearch">
+              <ng-container *ngIf="item.optionsToSearch">
+                <td>
+                  <ng-select [(ngModel)]="item.valuesToSearch" (remove)="search(item)" (clear)="clearSearch(item)" (change)="search(item)" style="min-width: 100px;" class="form-control" [items]="item.optionsToSearch" multiple="true"
+                      [placeholder]="'Buscar'" [selectOnTab]="true" bindValue="value" bindLabel="label">
+                    </ng-select>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="!item.optionsToSearch">
+                <td *ngIf="item.show" scope="col" [ngSwitch]="item.type">
+                  <div *ngSwitchCase="'date'" class="d-flex align-items-center">
+                    <input  type="text" style="min-width: 50px;"
+                           placeholder="Escoger rango"
+                           class="form-control"
+                           bsDaterangepicker
+                           [(ngModel)]="item.valuesToSearch"
+                           (bsValueChange)="searchDate($event, item)"
+                           placement="left"
+                           [bsConfig]="{ isAnimated: true, adaptivePosition: true, ranges: dateRanges }">
+                      <span style="margin-left: 6px;" (click)="cleanDate(item)"><i class="fas fa-times"></i></span>
+                  </div>
+                  <ng-select *ngSwitchDefault [(ngModel)]="item.valuesToSearch" (remove)="search(item)" (clear)="clearSearch(item)" (add)="search(item)" style="min-width: 100px;" class="form-control" [items]="[]" [addTag]="true" multiple="true"
+                    addTagText="Tab o Enter para agregar nuevo criterio" [placeholder]="'Buscar'" [selectOnTab]="true">
+                  </ng-select>
+                </td>
+              </ng-container>
+  
+            </ng-container>
+            <ng-container *ngIf="item.hideSearch">
+              <td></td>
+            </ng-container>
+    
+          </ng-container>
+          <td *ngIf="settings?.actionsButtons"></td>
+          <td *ngIf="settings?.options"></td>
+        </tr>
+        
+        <!-- CARGA DE DATOS-->
+        <ng-container *ngFor="let data of data">
+          <tr [ngClass]="{'bg-secondary': isSelected(data)}" (click)="onPickrow(data)">
+
+            <td class="text-center" *ngIf="!settings?.selectRows&&!settings?.onPickRow">
+              <input type="checkbox" [ngModel]="isSelected(data)" (ngModelChange)="selectRow(data)">
+            </td>
+
+            <ng-container *ngFor="let column of groupSettingSearch">
+              <td *ngIf="column.show" [ngSwitch]='column.type'>
+                <ng-container *ngIf="column.transform">
+                  <div [innerHTML]="middlewareTransform(column.transform, data, column)"></div>
+                </ng-container>
+                <ng-container *ngIf="!column.transform">
+                  <ng-container *ngSwitchCase="'string'">{{data[column.id]}}</ng-container>
+                  <ng-container *ngSwitchCase="'date'">{{data[column.id] | date: 'dd/MM/yyy'}}</ng-container>
+                  <ng-container *ngSwitchCase="'currency'">{{data[column.id] | currency: (column.currency? column.currency : _globalCurrency) : 'symbol-narrow'}}
+                  </ng-container>
+                  <a href="{{column.id}}" *ngSwitchCase="'link'">{{data[column.id]}}</a>
+                  <ng-container *ngSwitchDefault>{{data[column.id]}}</ng-container>
+                </ng-container>
+              </td>
+            </ng-container>
+
+            <td class="text-center" *ngIf="settings?.actionsButtons?.length>0">
+              <ng-container *ngFor="let item of settings?.actionsButtons">
+                <a *ngIf="item.showIf?item.showIf(data):true" (click)="item.do(data)" [class]="item?.Class? item?.Class : 'btn btn-sm hoverButton mx-1'" class="btn btn-sm hoverButton mx-1" ngbTooltip="{{item.label}}">
+                  <i class="{{item.icon}}"></i>
+                </a>
+              </ng-container>
+            </td>
+
+            <td class="text-center" *ngIf="settings?.options?.length>0">
+              <div ngbDropdown placement="bottom-right">
+                <a class="btn btn-sm hoverButton" ngbDropdownToggle>
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                  <ng-container *ngFor="let option of settings?.options">
+                    <button ngbDropdownItem *ngIf="option.showIf?option.showIf(data):true" class="dropdown-item" (click)="option.do(data)"><i class="{{option.icon}}"></i> &nbsp; {{option.label}}</button>
+                  </ng-container>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+</div>

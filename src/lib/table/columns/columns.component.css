@@ -1,0 +1,57 @@
+
+.pagSize {
+    display: flex;
+ }
+  
+.selected{
+  background-color: #E8E8E8;
+}
+
+table th,
+table td {
+    word-wrap: break-word;
+    white-space: normal
+}
+
+
+.mousepointer{
+  cursor: pointer;
+}
+
+.btn-icon-only {
+  width: 2.375rem;
+  height: 2.375rem;
+  padding: 0;
+}
+
+a .btn-icon-only {
+  line-height: 2.5;
+}
+
+.btn-icon-only .btn-sm {
+  width: 2rem;
+  height: 2rem;
+}
+
+.dropdown-menu-right{
+  border: none;
+  box-shadow: 0 50px 100px rgb(50 50 93 / 10%), 0 15px 35px rgb(50 50 93 / 15%), 0 5px 15px rgb(0 0 0 / 10%);
+}
+
+.hoverButton:hover{
+  box-shadow: 0 50px 100px rgb(50 50 93 / 10%), 0 15px 35px rgb(50 50 93 / 15%), 0 5px 15px rgb(0 0 0 / 10%);
+  position: relative;
+  animation: HoverAnimation 0.1s both;
+}
+
+@keyframes HoverAnimation {
+  0% { top: 0; }
+  100% { top: -4px; }
+}
+
+.ng-select.form-control {
+  background-color: transparent;
+  border: none;
+  height: auto;
+  padding: 0;
+}

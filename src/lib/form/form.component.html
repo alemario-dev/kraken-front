@@ -1,0 +1,14 @@
+<div class="card shadow rounded">
+  <div class="card-header border-0">
+    <div class="row align-items-center">
+      <div class="col-8">
+        <h3 class="mb-0"><ng-content select="[title]"></ng-content></h3>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit(getData)">
+      <ng-content></ng-content>
+    </form>
+  </div>
+</div>

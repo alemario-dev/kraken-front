@@ -1,0 +1,39 @@
+.btn-rounded {
+    border-radius: 50%;
+}
+
+.btn-icon-only {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+}
+
+.bg-morado {
+  background-color: #533E85;
+}
+  
+a .btn-icon-only {
+line-height: 2.5;
+}
+
+.btn-icon-only .btn-sm {
+width: 2rem;
+height: 2rem;
+}
+
+.hoverButton:hover{
+    box-shadow: 0 50px 100px rgb(50 50 93 / 10%), 0 15px 35px rgb(50 50 93 / 15%), 0 5px 15px rgb(0 0 0 / 10%);
+    position: relative;
+    animation: HoverAnimation 0.1s both;
+  }
+  
+  @keyframes HoverAnimation {
+    0% { top: 0; }
+    100% { top: -5px; }
+  }
+
+:host(*){
+  font-family: 'Open Sans', 'sans-serif';
+  font-size: 17px;
+  font-weight: 600;
+}

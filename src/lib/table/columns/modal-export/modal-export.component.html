@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title">Exportar tabla</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-6" *ngFor="let column of this.father?.colummnsInfo?.groupSettingSearch">
+          <div class="form-group">
+            <input class="" type="checkbox" name="input-{{column.id}}"
+                        [(ngModel)]="column.export" id="input-{{column.id}}">
+            <label class="form-control-label" for="input-{{column.id}}">&nbsp;{{column.title}}</label>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" [disabled]="loading" (click)="generateExport()" status="info">Exportar</button>
+  </div>

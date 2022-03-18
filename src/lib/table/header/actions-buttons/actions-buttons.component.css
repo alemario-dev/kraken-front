@@ -1,0 +1,42 @@
+.pagSize {
+    display: flex;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading img {
+    width: 100%;
+    max-width: 500px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+table th,
+table td {
+    word-wrap: break-word;
+    white-space: normal
+}
+
+.btn-rounded {
+    border-radius: 50%;
+}
+
+
+.ng-select.form-control {
+    background-color: transparent;
+    border: none;
+    height: auto;
+    padding: 0;
+    max-width: 100%;
+}
+
+.ng-select.form-control.is-invalid ::ng-deep .ng-select-container {
+    min-height: 0px;
+    border: solid 1px #fb6340;
+}
