@@ -15,7 +15,6 @@ import { ColumnComponent } from './table/columns/column/column.component';
 import { FooterComponent } from './table/footer/footer.component';
 import { ModalExportComponent } from './table/columns/modal-export/modal-export.component';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,15 +26,15 @@ import { HttpClientModule } from '@angular/common/http';
     ActionsButtonsComponent, 
     ColumnsComponent, 
     ColumnComponent, 
-    FooterComponent, ModalExportComponent,
+    FooterComponent, 
+    ModalExportComponent
   ],
   imports: [
     CommonModule,
     NgSelectModule,
     FormsModule,
     NgbModule,
-    BsDatepickerModule.forRoot(),
-    HttpClientModule
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     KrakenComponent, 

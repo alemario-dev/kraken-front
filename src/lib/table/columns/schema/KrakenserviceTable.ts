@@ -15,7 +15,7 @@ export class KrakenServiceTable extends KrakenDataTable{
     }
 
     execute(currentPage, sizePage, query, sort) {
-        return this.service[this.nameService]({currentPage, sizePage, query, sort});
+        return this.service[this.nameService]({page: currentPage, limit: sizePage, query, sort});
     }
     
 }

@@ -2,7 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildr
 import { OptionToSearch, TableColumn, TYPESORT } from './settingColumn';
 
 @Component({
-  selector: '[kc]',
+  selector: 'kraken-colum',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.css']
 })

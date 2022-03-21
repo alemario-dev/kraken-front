@@ -111,6 +111,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
     } else {
       this.actualSort = {};
     }
+    this.getData()
   }
 
   selectRow(row){

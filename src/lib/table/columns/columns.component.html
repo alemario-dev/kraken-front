@@ -1,12 +1,12 @@
 <div class="table-responsive" style="min-height: 20rem;">
-    <table class="table align-items-center table-flush table-hover" [ngClass]="{'table-hover': settings?.onPickRow}">
+    <table class="table align-items-center table-flush" [ngClass]="{'table-hover': settings?.onPickRow}">
       <thead class="thead-light">
         <tr>
           <th *ngIf="!settings?.selectRows&&!settings?.onPickRow"></th>
           <ng-container *ngFor="let item of groupSettingSearch">
             <th scope="col" *ngIf="item.show">
               <div class="d-flex">
-                <span style="width: 100%;">
+                <span>
                   {{item.title}}
                 </span>
                 <div *ngIf="item.canSort" class="text-right">
@@ -17,8 +17,8 @@
               </div>
             </th>
           </ng-container>
-          <th class="flex-fill" *ngIf="settings?.actionsButtons?.length>0">Acciones</th>
-          <th class="flex-fill" *ngIf="settings?.options?.length>0"></th>
+          <th *ngIf="settings?.actionsButtons?.length>0">Acciones</th>
+          <th *ngIf="settings?.options?.length>0"></th>
         </tr>
       </thead>
       <tbody>

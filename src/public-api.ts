@@ -2,7 +2,6 @@
  * Public API Surface of kraken
  */
 
-export * from './lib/kraken.service';
 export * from './lib/kraken.component';
 export * from './lib/kraken.module';
 export * from './lib/form/form.component';
