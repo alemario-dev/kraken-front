@@ -5,7 +5,7 @@ import { KrakenFieldComponent } from './form/field/field.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from './table/table.component';
 import { HeaderComponent } from './table/header/header.component';
@@ -15,6 +15,8 @@ import { ColumnComponent } from './table/columns/column/column.component';
 import { FooterComponent } from './table/footer/footer.component';
 import { ModalExportComponent } from './table/columns/modal-export/modal-export.component';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,9 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
     NgSelectModule,
     FormsModule,
     NgbModule,
+    NgxIntlTelInputModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
     BsDatepickerModule.forRoot()
   ],
   exports: [

@@ -34,7 +34,8 @@ export enum INPUTTYPEFIELDS {
     SELECT_CLOSE = 'SELECT_CLOSE',
     SELECT_OPEN = 'SELECT_OPEN',
     PASSWORD = 'password',
-    NUMBER = 'number'
+    NUMBER = 'number',
+    PHONE = 'phone',
 }
 
 export enum VALIDATE_FIELDS {

@@ -29,7 +29,6 @@ export class FormComponent implements OnInit {
 
   public get getData(){
     let objectToSend = {} as any;
-
     if (this.ValidateForm() == VALIDATE_FIELDS.INVALID) {
       return null;
     }
