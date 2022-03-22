@@ -48,17 +48,17 @@ export class KrakenFieldComponent implements OnInit {
 
   ngOnInit(): void {
     this.phoneForm = this.formBuilder.group({
-      phone: [undefined, [Validators.required]],
-      label: ["", Validators.required],
+      phone: [undefined, [Validators.required]]
     });
   }
 
 
   validator(){
     let result;
-    if (this.type === INPUTTYPEFIELDS.PHONE) {
+    if (this.type == INPUTTYPEFIELDS.PHONE && this.required) {
       let phone = this.phoneForm.value.phone;
-      result = !phone? false : true;
+      this.messageError = "LLena el campo";
+      result = !phone;
     }
     else{
       result = this.validators?.find((fun)=>{
@@ -69,7 +69,12 @@ export class KrakenFieldComponent implements OnInit {
         return krakenVal;
       });
     }
-    
+    result = !this.value&&this.required? VALIDATE_FIELDS.INVALID: result
+
+    if (result === VALIDATE_FIELDS.INVALID) {
+      this.messageError = "El campo es obligatorio" ;
+    }
+
     return (result? VALIDATE_FIELDS.INVALID : VALIDATE_FIELDS.VALID)
   }
 
@@ -78,10 +83,13 @@ export class KrakenFieldComponent implements OnInit {
   }
 
   public get FinalValue(){
+
+    if (this.type === INPUTTYPEFIELDS.PHONE) {
+      this.value = this.phoneForm.value.phone;
+    }
     if (!this.id) {
       console.error("Falta definir id "  + this.placeholder);
     }
-    console.log(this.value);
     return this.value;
   }
 

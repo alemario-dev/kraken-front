@@ -32,7 +32,10 @@
                 ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Guatemala"
                 [tooltipField]="TooltipLabel.Name" [phoneValidation]="false" [separateDialCode]="true"
                 name="phone" formControlName="phone">
-              </ngx-intl-tel-input>
+              </ngx-intl-tel-input><br>
+              <div *ngIf="validator()&&keyTrigger&&type==TYPE_FIELDS.PHONE" class="bad-phone">
+                Errooooooooooor
+              </div>
             </ng-container>
             <div *ngIf="validator()&&keyTrigger" class="invalid-feedback">
                 {{messageError?messageError: 'Hay un error!'}}

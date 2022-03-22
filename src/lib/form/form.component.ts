@@ -40,13 +40,15 @@ export class FormComponent implements OnInit {
   }
 
   private ValidateForm(){
-    const objectTrue  = this.FieldsView?.toArray().find(element => {
+    const objectTrue  = this.FieldsView?.toArray().map(element => {
       if (element.validator() == VALIDATE_FIELDS.INVALID) {
         element.keyTrigger = true;
+        console.log(element.id);
       }
-      return element.validator() == VALIDATE_FIELDS.INVALID;
+      return element.validator();
     });
-    return objectTrue? VALIDATE_FIELDS.INVALID: VALIDATE_FIELDS.VALID;
+
+    return objectTrue.some((e)=>e==VALIDATE_FIELDS.INVALID)? VALIDATE_FIELDS.INVALID: VALIDATE_FIELDS.VALID;
   }
 
   public ValidateGroup(GroupIds:string[]): VALIDATE_FIELDS{
