@@ -1,15 +1,15 @@
 <div class="table-responsive" style="min-height: 20rem;">
-    <table class="table align-items-center table-flush" [ngClass]="{'table-hover': settings?.onPickRow}">
+    <table class="table align-items-center table-flush" [ngClass]="{'table-hover': settings?.onPickRow}" style="table-layout: auto;">
       <thead class="thead-light">
         <tr>
-          <th *ngIf="!settings?.selectRows&&!settings?.onPickRow"></th>
+          <th *ngIf="!settings?.selectRows&&!settings?.onPickRow" scope="col"></th>
           <ng-container *ngFor="let item of groupSettingSearch">
-            <th scope="col" *ngIf="item.show">
+            <th scope="col" *ngIf="item.show" style="min-width: 100px;">
               <div class="d-flex">
                 <span>
                   {{item.title}}
                 </span>
-                <div *ngIf="item.canSort" class="text-right">
+                <div *ngIf="item.canSort" class="text-left">
                   <i *ngIf="item.sort == 0"  (click)="sort(item)" class="fas fa-sort"></i>
                   <i *ngIf="item.sort == 1"  (click)="sort(item)" class="fas fa-sort-up"></i>
                   <i *ngIf="item.sort == -1" (click)="sort(item)" class="fas fa-sort-down"></i>
@@ -67,7 +67,7 @@
         <ng-container *ngFor="let data of data">
           <tr [ngClass]="{'bg-secondary': isSelected(data)}" (click)="onPickrow(data)">
 
-            <td class="text-center" *ngIf="!settings?.selectRows&&!settings?.onPickRow">
+            <td class="text-center" *ngIf="!settings?.selectRows&&!settings?.onPickRow" style="min-width: 10px;">
               <input type="checkbox" [ngModel]="isSelected(data)" (ngModelChange)="selectRow(data)">
             </td>
 
@@ -81,13 +81,13 @@
                   <ng-container *ngSwitchCase="'date'">{{data[column.id] | date: 'dd/MM/yyy'}}</ng-container>
                   <ng-container *ngSwitchCase="'currency'">{{data[column.id] | currency: (column.currency? column.currency : _globalCurrency) : 'symbol-narrow'}}
                   </ng-container>
-                  <a href="{{column.id}}" *ngSwitchCase="'link'">{{data[column.id]}}</a>
+                  <a href="{{data[column.id]}}" *ngSwitchCase="'link'">{{data[column.id]}}</a>
                   <ng-container *ngSwitchDefault>{{data[column.id]}}</ng-container>
                 </ng-container>
               </td>
             </ng-container>
 
-            <td class="text-center" *ngIf="settings?.actionsButtons?.length>0">
+            <td *ngIf="settings?.actionsButtons?.length>0" style="width: 175px;">
               <ng-container *ngFor="let item of settings?.actionsButtons">
                 <a *ngIf="item.showIf?item.showIf(data):true" (click)="item.do(data)" [class]="item?.Class? item?.Class : 'btn btn-sm hoverButton mx-1'" class="btn btn-sm hoverButton mx-1" ngbTooltip="{{item.label}}">
                   <i class="{{item.icon}}"></i>
@@ -95,7 +95,7 @@
               </ng-container>
             </td>
 
-            <td class="text-center" *ngIf="settings?.options?.length>0">
+            <td class="text-center" *ngIf="settings?.options?.length>0" style="width: 50px;">
               <div ngbDropdown placement="bottom-right">
                 <a class="btn btn-sm hoverButton" ngbDropdownToggle>
                   <i class="fas fa-ellipsis-v"></i>
