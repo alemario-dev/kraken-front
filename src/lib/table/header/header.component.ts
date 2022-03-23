@@ -8,12 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor() { }
-  @Input() clickOnCreate: (any);
+  @Input() clickOnCreate: () => void;
   ngOnInit(): void {
-  }
-
-  clickCreate(){
-    this.clickOnCreate();
   }
 
 }

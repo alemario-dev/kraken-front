@@ -15,7 +15,7 @@ import { ColumnComponent } from './table/columns/column/column.component';
 import { FooterComponent } from './table/footer/footer.component';
 import { ModalExportComponent } from './table/columns/modal-export/modal-export.component';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -36,9 +36,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgSelectModule,
     FormsModule,
     NgbModule,
-    NgxIntlTelInputModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
     BsDatepickerModule.forRoot()
   ],
   exports: [

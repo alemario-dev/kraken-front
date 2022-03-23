@@ -10,7 +10,7 @@ import { VALIDATE_FIELDS } from './field/settingField.component';
 export class FormComponent implements OnInit {
 
 
-  @ContentChildren(KrakenFieldComponent) FieldsView: QueryList<KrakenFieldComponent> | undefined;
+  @ContentChildren(KrakenFieldComponent, { descendants: true }) FieldsView: QueryList<KrakenFieldComponent> | undefined;
   @Input() readonly: boolean = false;
   @Input() onSubmit: any;
   
@@ -33,8 +33,19 @@ export class FormComponent implements OnInit {
       return null;
     }
 
-    this.FieldsView?.toArray().forEach(element => {
-      objectToSend[element.id] = element.FinalValue;
+    this.FieldsView?.toArray().map(element => {
+      const ids = element.id.split('.');
+      
+      let RecusiveObject = objectToSend;
+      ids.map((id, index)=>{
+        if (index != ids.length-1) {
+          RecusiveObject[id] = RecusiveObject[id]?RecusiveObject[id]:{} as any;
+          RecusiveObject = RecusiveObject[id];
+        }else{
+          RecusiveObject[ids.pop()] = element.FinalValue;
+        }
+      })
+      
     });
     return objectToSend;
   }
@@ -43,7 +54,6 @@ export class FormComponent implements OnInit {
     const objectTrue  = this.FieldsView?.toArray().map(element => {
       if (element.validator() == VALIDATE_FIELDS.INVALID) {
         element.keyTrigger = true;
-        console.log(element.id);
       }
       return element.validator();
     });
