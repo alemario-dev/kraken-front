@@ -9,7 +9,7 @@
                 <span class="input-group-text"><i class="{{icon}}"></i></span>
             </div>
             <ng-container *ngIf="type!=TYPE_FIELDS.SELECT_CLOSE&&type!=TYPE_FIELDS.SELECT_OPEN&&type!=TYPE_FIELDS.CHECKBOX&&type!=TYPE_FIELDS.TEXTAREA&&type!=TYPE_FIELDS.PHONE">
-                <input (keyup)="keyFunc($event)" [(ngModel)]="value" #KrakeField class="form-control" name="{{id}}" id="{{id}}" [placeholder]="placeholder?placeholder:''" type="{{type}}" autocomplete="{{id}}"
+                <input (keyup)="keyFunc($event)" [(ngModel)]="value" class="form-control" name="{{id}}" id="{{id}}" [placeholder]="placeholder?placeholder:''" type="{{type}}" autocomplete="{{id}}"
                 [ngClass]="{ 'is-invalid': validator()&&keyTrigger }" [disabled]="block?block:edit">
             </ng-container>
             <ng-container *ngIf="type==TYPE_FIELDS.SELECT_CLOSE || type==TYPE_FIELDS.SELECT_OPEN">
@@ -18,23 +18,28 @@
                                 </ng-select>
             </ng-container>
             <ng-container *ngIf="type==TYPE_FIELDS.TEXTAREA">
-                <textarea [(ngModel)]="value" #KrakeField rows="5" name="{{id}}"
+                <textarea [(ngModel)]="value" rows="5" name="{{id}}"
                 id="{{id}}" class="form-control"
                 [placeholder]="placeholder?placeholder:''" [ngClass]="{ 'is-invalid': validator()&&keyTrigger }" [disabled]="block?block:edit"></textarea>
             </ng-container>
 
-            <ng-container *ngIf="type==TYPE_FIELDS.PHONE" [formGroup]="phoneForm">
-                <ngx-intl-tel-input placeholder="Telefono" [cssClass]="'form-control'"
-                [enableAutoCountrySelect]="true" [searchCountryPlaceholder]="'Buscar país'"
-                [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[
-                  SearchCountryField.Iso2,
-                  SearchCountryField.Name
-                ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Guatemala"
-                [tooltipField]="TooltipLabel.Name" [phoneValidation]="false" [separateDialCode]="true"
-                name="phone" formControlName="phone">
-              </ngx-intl-tel-input><br>
+            <ng-container *ngIf="type==TYPE_FIELDS.PHONE">
+                <ng-container *ngIf="!(block?block:edit)" [formGroup]="phoneForm">
+                    <ngx-intl-tel-input placeholder="Telefono" [cssClass]="'form-control'"
+                        [enableAutoCountrySelect]="true" [searchCountryPlaceholder]="'Buscar país'"
+                        [enablePlaceholder]="false" [searchCountryFlag]="true" [searchCountryField]="[
+                        SearchCountryField.Iso2,
+                        SearchCountryField.Name
+                        ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Guatemala"
+                        [tooltipField]="TooltipLabel.Name" [phoneValidation]="false" [separateDialCode]="true"
+                        name="phone" formControlName="phone">
+                    </ngx-intl-tel-input><br>
+                </ng-container>
+                <ng-container *ngIf="block?block:edit">
+                    <input value="{{value?.internationalNumber}}" class="form-control"  [placeholder]="placeholder?placeholder:''" type="text" autocomplete="{{id}}" [disabled]="true">
+                </ng-container>
               <div *ngIf="validator()&&keyTrigger&&type==TYPE_FIELDS.PHONE" class="bad-phone">
-                Errooooooooooor
+                {{messageError?messageError: 'Hay un error!'}}
               </div>
             </ng-container>
             <div *ngIf="validator()&&keyTrigger" class="invalid-feedback">

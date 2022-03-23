@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <hr class="my-1">
+      <hr class="my-1" *ngIf="!colummnsInfo?.settings?.selectRows&&!colummnsInfo?.settings?.onPickRow">
       <div class="container-fluid" style="min-height: 2rem;" *ngIf="!colummnsInfo?.settings?.selectRows&&!colummnsInfo?.settings?.onPickRow">
         <div class="d-flex flex-row">
           <div class="my-1 mx-2">

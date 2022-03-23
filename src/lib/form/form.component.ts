@@ -21,7 +21,7 @@ export class FormComponent implements OnInit {
   }
 
   ngAfterContentInit(): void {
-    //Si esta en modo solo lectura edita los fields en modo vista
+    //* Todos los campos los bloquea
     this.FieldsView?.toArray().forEach(element => {
       element.edit = this.readonly;
     });

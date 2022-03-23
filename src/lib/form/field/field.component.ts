@@ -34,6 +34,8 @@ export class KrakenFieldComponent implements OnInit {
   
   messageError:string = "";
   edit = false;
+
+  
   keyTrigger = false;
   TYPE_FIELDS =INPUTTYPEFIELDS;
   constructor(
@@ -48,16 +50,17 @@ export class KrakenFieldComponent implements OnInit {
 
   ngOnInit(): void {
     this.phoneForm = this.formBuilder.group({
-      phone: [undefined, [Validators.required]]
+      phone: [this.value?this.value: undefined]
     });
   }
 
 
   validator(){
     let result;
-    if (this.type == INPUTTYPEFIELDS.PHONE && this.required) {
+    if (this.type === INPUTTYPEFIELDS.PHONE && this.required) {
       let phone = this.phoneForm.value.phone;
       this.messageError = "LLena el campo";
+      this.value = phone;
       result = !phone;
     }
     else{
@@ -69,7 +72,7 @@ export class KrakenFieldComponent implements OnInit {
         return krakenVal;
       });
     }
-    result = !this.value&&this.required? VALIDATE_FIELDS.INVALID: result
+    result = !this.value&&this.required&&!this.block? VALIDATE_FIELDS.INVALID: result
 
     if (result === VALIDATE_FIELDS.INVALID) {
       this.messageError = "El campo es obligatorio" ;
@@ -83,10 +86,6 @@ export class KrakenFieldComponent implements OnInit {
   }
 
   public get FinalValue(){
-
-    if (this.type === INPUTTYPEFIELDS.PHONE) {
-      this.value = this.phoneForm.value.phone;
-    }
     if (!this.id) {
       console.error("Falta definir id "  + this.placeholder);
     }
