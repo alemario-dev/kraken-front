@@ -1,6 +1,6 @@
 {
   "name": "@alemario-dev/kraken-front",
-  "version": "0.0.52",
+  "version": "0.0.53",
   "peerDependencies": {
     "@angular/common": "^10.2.5",
     "@angular/core": "^10.2.5",
