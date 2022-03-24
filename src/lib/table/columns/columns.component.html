@@ -81,7 +81,7 @@
                   <ng-container *ngSwitchCase="'date'">{{data[column.id] | date: 'dd/MM/yyy'}}</ng-container>
                   <ng-container *ngSwitchCase="'currency'">{{data[column.id] | currency: (column.currency? column.currency : _globalCurrency) : 'symbol-narrow'}}
                   </ng-container>
-                  <a href="{{data[column.id]}}" *ngSwitchCase="'link'">{{data[column.id]}}</a>
+                  <a href="{{column.baseUrl + data[column.id]}}" *ngSwitchCase="'link'">{{data[column.id]}}</a>
                   <ng-container *ngSwitchDefault>{{data[column.id]}}</ng-container>
                 </ng-container>
               </td>

@@ -23,6 +23,7 @@ export class TableColumn {
   transform?: FunctionOnRow;
   export?: boolean = true;
   currency: string;
+  baseUrl: string;
   /**
    * Preserva la transformacion hecha para la tabla en la exportacion
    */

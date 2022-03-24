@@ -53,6 +53,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
     this.defaultSort = {};
     this.actualSort = {};
     this.actualQuery = {};
+    this.defaultQuery = {};
     let date = new Date();
     var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
     var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -87,7 +88,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
 
   getData(){
     this.dataClass.execute(this.currentPage, this.sizePage, this.actualQuery, this.actualSort).subscribe((e)=>{
-      this.data =e;
+      this.data = e;
     });
   }
 

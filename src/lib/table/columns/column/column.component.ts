@@ -24,6 +24,8 @@ export class ColumnComponent implements OnInit{
   @Input() currency? : string;
   @Input() transform: any;
   @Input() export: boolean = true;
+  @Input() baseUrl:string;
+
   @Output() actualiceSetting = new EventEmitter<number>();
 
   ngOnInit(): void {
@@ -46,7 +48,8 @@ export class ColumnComponent implements OnInit{
       title: this.title,
       currency:  this.currency,
       transform: this.transform,
-      export: this.export
+      export: this.export,
+      baseUrl: this.baseUrl
     }
 
     return salida;
