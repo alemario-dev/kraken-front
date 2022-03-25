@@ -90,6 +90,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
     this.dataClass.execute(this.currentPage, this.sizePage, this.actualQuery, this.actualSort).subscribe((e)=>{
       this.data = e;
     });
+    this.totalPages = this.dataClass.totalPages?this.dataClass.totalPages : 9999;
   }
 
   sort(column){

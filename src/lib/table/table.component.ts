@@ -24,11 +24,12 @@ export class TableComponent implements OnInit, AfterContentInit {
 
     this.sizePage = 10;
     this.currentPage = 1;
-    this.totalPages = 10;
+    this.totalPages = 999999;
   }
 
   ngAfterContentInit(): void {
     this.refresh();
+    this.totalPages = this.colummnsInfo.totalPages;
   }
   ngOnInit(): void {
   }

@@ -2,7 +2,7 @@
     <table class="table align-items-center table-flush" [ngClass]="{'table-hover': settings?.onPickRow}" style="table-layout: auto;">
       <thead class="thead-light">
         <tr>
-          <th *ngIf="!settings?.selectRows&&!settings?.onPickRow" scope="col"></th>
+          <th *ngIf="settings?.selectRows&&!settings?.onPickRow" scope="col"></th>
           <ng-container *ngFor="let item of groupSettingSearch">
             <th scope="col" *ngIf="item.show" style="min-width: 100px;">
               <div class="d-flex">
@@ -24,7 +24,7 @@
       <tbody>
         <!-- MENU DE BUSQUEDA -->
         <tr *ngIf="showSearch">
-          <td></td>
+          <td *ngIf="settings?.selectRows&&!settings?.onPickRow"></td>
           <ng-container *ngFor="let item of groupSettingSearch">
             <ng-container *ngIf="!item.hideSearch">
               <ng-container *ngIf="item.optionsToSearch">
@@ -67,7 +67,7 @@
         <ng-container *ngFor="let data of data">
           <tr [ngClass]="{'bg-secondary': isSelected(data)}" (click)="onPickrow(data)">
 
-            <td class="text-center" *ngIf="!settings?.selectRows&&!settings?.onPickRow" style="min-width: 10px;">
+            <td class="text-center" *ngIf="settings?.selectRows&&!settings?.onPickRow" style="min-width: 10px;">
               <input type="checkbox" [ngModel]="isSelected(data)" (ngModelChange)="selectRow(data)">
             </td>
 

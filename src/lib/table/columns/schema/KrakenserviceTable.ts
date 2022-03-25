@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 import { KrakenDataTable } from "./schemaDataTable";
 
 export class KrakenServiceTable extends KrakenDataTable {
@@ -10,8 +11,8 @@ export class KrakenServiceTable extends KrakenDataTable {
   nameService: any;
   defaultQuery: any = {};
   defaultSort: any = {};
-
-  constructor(KrakenService , nameService: string, defaultQuery: any = {}, defaultSort: any = {}) {
+  
+  constructor(KrakenService , nameService: string= null, defaultQuery: any = {}, defaultSort: any = {}) {
     super();
     this.service = KrakenService;
     this.nameService = nameService;
@@ -21,20 +22,22 @@ export class KrakenServiceTable extends KrakenDataTable {
 
   execute(currentPage, sizePage, query, sort) {
     Object.assign(query, this.defaultQuery);
-    
-    Object.assign(query, {page:currentPage });
-    Object.assign(query, {limit:sizePage });
-
     Object.assign(sort, this.defaultSort);
-    const paramsToSend = {
-        query,
-        sort
-    }
-    console.log(paramsToSend);
+
+    
     if (this.nameService) {
-        return this.service[this.nameService](paramsToSend);
+        if (!this.service[this.nameService]) {
+            console.error("revisa el nombre del servicio");
+        }
+        return this.service[this.nameService](currentPage, sizePage, query, sort);
     }
 
-    return this.service.getAllWithOptions(paramsToSend);
+    return new Observable(subscriber => {
+        this.service.listWithOptions(currentPage, sizePage, query, sort).subscribe((res)=>{
+            this.totalPages = res?.totalPages? res.totalPages :  0;
+            subscriber.next(res?.elements? res.elements:res);
+        });
+      });
+    
   }
 }

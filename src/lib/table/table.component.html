@@ -35,8 +35,8 @@
           </div>
         </div>
       </div>
-      <hr class="my-1" *ngIf="!colummnsInfo?.settings?.selectRows&&!colummnsInfo?.settings?.onPickRow">
-      <div class="container-fluid" style="min-height: 2rem;" *ngIf="!colummnsInfo?.settings?.selectRows&&!colummnsInfo?.settings?.onPickRow">
+      <hr class="my-1" *ngIf="colummnsInfo?.settings?.selectRows&&!colummnsInfo?.settings?.onPickRow">
+      <div class="container-fluid" style="min-height: 2rem;" *ngIf="colummnsInfo?.settings?.selectRows&&!colummnsInfo?.settings?.onPickRow">
         <div class="d-flex flex-row">
           <div class="my-1 mx-2">
             <i  *ngIf="colummnsInfo.TypeSelected=='all'" class="fas fa-check-square fa-lg" (click)="selectAllrows()"></i>
