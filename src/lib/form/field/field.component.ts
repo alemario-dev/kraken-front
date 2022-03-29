@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { IkrakenValidator, INPUTTYPEFIELDS, KrakenFieldSetting, VALIDATE_FIELDS } from './settingField.component';
+import { IkrakenValidator, INPUTTYPEFIELDS, VALIDATE_FIELDS, ValidatorEmail } from './settingField.component';
 
 @Component({
   selector: 'kraken-field',
@@ -21,6 +21,7 @@ export class KrakenFieldComponent implements OnInit {
   @Input() icon?:  string;
   @Input() values?:any;
   @Input() bindLabel?:string;
+  @Input() bindValue?:string;
 
   
   messageError:string = "";
@@ -68,6 +69,13 @@ export class KrakenFieldComponent implements OnInit {
 
   keyFunc($event:any){
     this.keyTrigger = true;
+  }
+
+  cargarValidadores(){
+    if (this.type === this.TYPE_FIELDS.EMAIL) {
+      this.validators = this.validators?this.validators:[];
+      this.validators.push(ValidatorEmail);
+    }
   }
 
 }

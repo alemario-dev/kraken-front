@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, OnInit, Output, QueryList } from '@angular/core';
 import {TYPESORT } from '../settingsTable.model';
 import { ColumnComponent } from './column/column.component';
 import { TableColumn } from './column/settingColumn';

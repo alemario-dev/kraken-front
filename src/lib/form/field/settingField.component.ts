@@ -1,25 +1,3 @@
-export class KrakenFieldSetting {
-    toolTip?: string;
-    validators?: IkrakenValidator[];
-    label: string;
-    type?:  INPUTTYPEFIELDS;
-    required?:  boolean;
-    icon?:  "";
-    
-    //propiedades para ng-select
-    values?:any;
-    bindLabel?:string;
-    constructor(label:any, required=false,  toolTip="",type = INPUTTYPEFIELDS.TEXT){
-        this.label = label;
-        this.type = type;
-        this.toolTip = toolTip;
-        this.required = required;
-    }
-
-    set setting(setting: KrakenFieldSetting){
-        Object.assign(this, setting);
-    }
-}
 
 export interface IkrakenValidator{
     function: (any);
@@ -36,9 +14,22 @@ export enum INPUTTYPEFIELDS {
     PASSWORD = 'password',
     NUMBER = 'number',
     PHONE = 'phone',
+    EMAIL = 'email',
 }
 
 export enum VALIDATE_FIELDS {
     VALID = 0,
     INVALID =  1
+}
+
+export const ValidatorEmail:IkrakenValidator =  {
+    function: (field)=>{
+        const re = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+        if (re.test(field))
+        {
+            return VALIDATE_FIELDS.VALID
+        }
+        return VALIDATE_FIELDS.INVALID
+    },
+    message: 'No es un correo valido'
 }

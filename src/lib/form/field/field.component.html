@@ -13,7 +13,7 @@
             [ngClass]="{ 'is-invalid': validator()&&keyTrigger }" [disabled]="block?block:edit">
         </ng-container>
         <ng-container *ngIf="type==TYPE_FIELDS.SELECT_CLOSE || type==TYPE_FIELDS.SELECT_OPEN">
-            <ng-select [(ngModel)]="value" class="form-control" [items]="values" [placeholder]="placeholder?placeholder:''" bindLabel="{{bindLabel}}"
+            <ng-select [(ngModel)]="value" class="form-control" [items]="values" [placeholder]="placeholder?placeholder:''" bindLabel="{{bindLabel}}" bindValue="{{bindValue}}"
             [ngClass]="{ 'is-invalid': validator()&&keyTrigger }" [multiple]="type==TYPE_FIELDS.SELECT_OPEN" [disabled]="block?block:edit">
                             </ng-select>
         </ng-container>
