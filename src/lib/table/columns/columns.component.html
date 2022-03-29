@@ -102,7 +102,7 @@
                 </a>
                 <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
                   <ng-container *ngFor="let option of settings?.options">
-                    <button ngbDropdownItem *ngIf="option.showIf?option.showIf(data):true" class="dropdown-item" (click)="option.do(data)"><i class="{{option.icon}}"></i> &nbsp; {{option.label}}</button>
+                    <button ngbDropdownItem *ngIf="option.showIf?option.showIf(data):true" class="dropdown-item {{option?.Class}}" (click)="option.do(data)"><i class="{{option.icon}}"></i> &nbsp; {{option.label}}</button>
                   </ng-container>
                 </div>
               </div>

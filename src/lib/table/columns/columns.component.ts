@@ -8,6 +8,7 @@ import * as XLSX from "xlsx";
 import * as FileSaver from "file-saver";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalExportComponent } from './modal-export/modal-export.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'kraken-table-columns',
@@ -48,7 +49,9 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
   
   public sizePage:number=10;
 
-  constructor() { 
+  constructor(
+    private _router: Router
+  ) { 
     this.data = [];
     this.defaultSort = {};
     this.actualSort = {};
@@ -77,20 +80,20 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
     this.groupsIds = this.contenido.toArray().map((e)=>e.id);
     this.groupSettingSearch = this.contenido.toArray().map((e)=>e.settingField);
     this.contenido.toArray().forEach((e)=>{
-      e.actualiceSetting.subscribe((type)=> this.getData())
+      e.actualiceSetting.subscribe((type)=> this.getData());
     });
     
   }
 
   ngOnInit(): void {
-    this.getData();
+    //this.getData();
   }
 
   getData(){
     this.dataClass.execute(this.currentPage, this.sizePage, this.actualQuery, this.actualSort).subscribe((e)=>{
       this.data = e;
+      this.totalPages = this.dataClass.totalPages;
     });
-    this.totalPages = this.dataClass.totalPages?this.dataClass.totalPages : 9999;
   }
 
   sort(column){
@@ -181,7 +184,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
 
   middlewareTransform(functionToDo, row, settings: TableColumn){
     let cadena:string = functionToDo(row);
-
+    cadena = cadena + '';
     cadena =  cadena.replace("${G}", this._globalCurrency);
     return cadena.replace("${C}", settings.currency);
   }
@@ -312,5 +315,9 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
     cleanDate(column) {
       delete this.actualQuery.$and;
       this.getData();
+    }
+
+    goToLink(link){
+      this._router.navigate([link]);
     }
 }

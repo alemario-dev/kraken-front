@@ -11,7 +11,7 @@ export class KrakenServiceTable extends KrakenDataTable {
   nameService: any;
   defaultQuery: any = {};
   defaultSort: any = {};
-  
+  public totalPages: number;
   constructor(KrakenService , nameService: string= null, defaultQuery: any = {}, defaultSort: any = {}) {
     super();
     this.service = KrakenService;
@@ -34,7 +34,7 @@ export class KrakenServiceTable extends KrakenDataTable {
 
     return new Observable(subscriber => {
         this.service.listWithOptions(currentPage, sizePage, query, sort).subscribe((res)=>{
-            this.totalPages = res?.totalPages? res.totalPages :  0;
+            this.totalPages = res?.totalPages? res.totalPages :  NaN;
             subscriber.next(res?.elements? res.elements:res);
         });
       });
