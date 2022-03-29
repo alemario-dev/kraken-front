@@ -17,6 +17,7 @@ import { ModalExportComponent } from './table/columns/modal-export/modal-export.
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgSelectModule,
     FormsModule,
     NgbModule,
+    RouterModule,
     BsDatepickerModule.forRoot()
   ],
   exports: [
