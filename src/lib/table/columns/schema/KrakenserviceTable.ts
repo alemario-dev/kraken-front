@@ -36,6 +36,8 @@ export class KrakenServiceTable extends KrakenDataTable {
         this.service.listWithOptions(currentPage, sizePage, query, sort).subscribe((res)=>{
             this.totalPages = res?.totalPages? res.totalPages :  NaN;
             subscriber.next(res?.elements? res.elements:res);
+        }, err=>{
+          console.error(err);
         });
       });
     

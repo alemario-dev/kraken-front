@@ -17,7 +17,7 @@
               </div>
             </th>
           </ng-container>
-          <th *ngIf="settings?.actionsButtons?.length>0">Acciones</th>
+          <th *ngIf="settings?.actionsButtons?.length>0"></th>
           <th *ngIf="settings?.options?.length>0"></th>
         </tr>
       </thead>
@@ -87,7 +87,7 @@
               </td>
             </ng-container>
 
-            <td *ngIf="settings?.actionsButtons?.length>0" style="width: 175px;">
+            <td class="actionsButtons" *ngIf="settings?.actionsButtons?.length>0" style="width: 175px;">
               <ng-container *ngFor="let item of settings?.actionsButtons">
                 <a *ngIf="item.showIf?item.showIf(data):true" (click)="item.do(data)" [class]="item?.Class? item?.Class : 'btn btn-sm hoverButton mx-1'" class="btn btn-sm hoverButton mx-1" ngbTooltip="{{item.label}}">
                   <i class="{{item.icon}}"></i>

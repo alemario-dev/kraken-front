@@ -1,12 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { IkrakenValidator, INPUTTYPEFIELDS, VALIDATE_FIELDS, ValidatorEmail } from './settingField.component';
+import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { IkrakenValidator, INPUTTYPEFIELDS, minLengthValidator, VALIDATE_FIELDS, ValidatorEmail } from './settingField.component';
 
 @Component({
   selector: 'kraken-field',
   templateUrl: './field.component.html',
   styleUrls: ['./field.component.css']
 })
-export class KrakenFieldComponent implements OnInit {
+export class KrakenFieldComponent implements OnInit, AfterContentInit{
 
   @ViewChild('content') content:ElementRef;
   @Input() value: any;
@@ -23,19 +23,23 @@ export class KrakenFieldComponent implements OnInit {
   @Input() bindLabel?:string;
   @Input() bindValue?:string;
 
-  
+  //infoValidadores
+  @Input() minLength?: number;
+  @Input() mustMatch?: string
   messageError:string = "";
   edit = false;
 
   
   keyTrigger = false;
   TYPE_FIELDS =INPUTTYPEFIELDS;
+
   constructor(
   ) { }
 
-  ngAfterViewInit(): void {
-    
+  ngAfterContentInit(): void {
+    this.cargarValidadores();
   }
+
 
   ngOnInit(): void {
     
@@ -45,7 +49,7 @@ export class KrakenFieldComponent implements OnInit {
   validator(){
     let result;
     result = this.validators?.find((fun)=>{
-      const krakenVal = fun?.function(this.value);
+      const krakenVal = fun?.function(this.value, this);
       if (krakenVal==VALIDATE_FIELDS.INVALID) {
         this.messageError = fun.message;
       }
@@ -72,9 +76,12 @@ export class KrakenFieldComponent implements OnInit {
   }
 
   cargarValidadores(){
+    this.validators = this.validators?this.validators:[];
     if (this.type === this.TYPE_FIELDS.EMAIL) {
-      this.validators = this.validators?this.validators:[];
       this.validators.push(ValidatorEmail);
+    }
+    if (this.minLength) {
+      this.validators.push(minLengthValidator);
     }
   }
 

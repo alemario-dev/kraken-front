@@ -20,6 +20,12 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  middleOnSumbit(){
+    const data = this.getData;
+    if (!data) { return }
+    this.onSubmit(data);
+  }
+
   ngAfterContentInit(): void {
     //* Todos los campos los bloquea
     this.FieldsView?.toArray().forEach(element => {
@@ -29,10 +35,13 @@ export class FormComponent implements OnInit {
 
   public get getData(){
     let objectToSend = {} as any;
+    //validar formulario
+    console.log(this.ValidateForm());
     if (this.ValidateForm() == VALIDATE_FIELDS.INVALID) {
       return null;
     }
 
+    //proceso de crear el objecto de salida
     this.FieldsView?.toArray().map(element => {
       const ids = element.id.split('.');
       
@@ -51,11 +60,16 @@ export class FormComponent implements OnInit {
   }
 
   private ValidateForm(){
+    //validadores individuales
     const objectTrue  = this.FieldsView?.toArray().map(element => {
-      if (element.validator() == VALIDATE_FIELDS.INVALID) {
+      let resultado = element.validator();
+      // const resultDifMatch = this.FieldsView.toArray().filter(e=>(e.mustMatch == element.mustMatch)&&element.mustMatch).find((e)=>e.value != element.value);
+      // resultado = resultDifMatch? VALIDATE_FIELDS.INVALID : resultado
+      if (resultado == VALIDATE_FIELDS.INVALID) {
         element.keyTrigger = true;
       }
-      return element.validator();
+
+      return resultado;
     });
 
     return objectTrue.some((e)=>e==VALIDATE_FIELDS.INVALID)? VALIDATE_FIELDS.INVALID: VALIDATE_FIELDS.VALID;

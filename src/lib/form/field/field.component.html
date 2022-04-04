@@ -8,7 +8,7 @@
         <div class="input-group-prepend" *ngIf="icon">
             <span class="input-group-text"><i class="{{icon}}"></i></span>
         </div>
-        <ng-container *ngIf="type!=TYPE_FIELDS.SELECT_CLOSE&&type!=TYPE_FIELDS.SELECT_OPEN&&type!=TYPE_FIELDS.CHECKBOX&&type!=TYPE_FIELDS.TEXTAREA&&type!=TYPE_FIELDS.PHONE">
+        <ng-container *ngIf="type!=TYPE_FIELDS.SELECT_CLOSE&&type!=TYPE_FIELDS.SELECT_OPEN&&type!=TYPE_FIELDS.CHECKBOX&&type!=TYPE_FIELDS.TEXTAREA">
             <input (keyup)="keyFunc($event)" [(ngModel)]="value" class="form-control" name="{{id}}" id="{{id}}" [placeholder]="placeholder?placeholder:''" type="{{type}}" autocomplete="{{id}}"
             [ngClass]="{ 'is-invalid': validator()&&keyTrigger }" [disabled]="block?block:edit">
         </ng-container>

@@ -1,5 +1,5 @@
 <ng-content></ng-content>
 
-<button (click)="clickOnCreate()" class="btn btn-icon-only btn-sm btn-rounded bg-primary text-white hoverButton" style="margin-left: 5px;" placement='top' ngbTooltip="Agregar">
+<button *ngIf="clickOnCreate" (click)="clickOnCreate()" class="btn btn-icon-only btn-sm btn-rounded bg-primary text-white hoverButton" style="margin-left: 5px;" placement='top' ngbTooltip="Agregar">
     +
 </button>

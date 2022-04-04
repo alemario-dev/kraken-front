@@ -17,19 +17,50 @@ export class ColumnComponent implements OnInit{
   @Input() sort? : TYPESORT = TYPESORT.DEFAULT;
   @Input() canSort? : boolean = true;
   @Input() valuesToSearch? : [];
-  @Input() literalSearch?: boolean;
+  @Input() literalSearch?: boolean = false;
   @Input() hideSearch?: boolean;
-  @Input() optionsToSearch? : OptionToSearch[];
+  @Input() optionsToSearch? : any;
   @Input() type? : string = "default";
   @Input() currency? : string;
   @Input() transform: any;
   @Input() export: boolean = true;
   @Input() baseUrl:string;
 
+  @Input() minLength: number;
+
   @Output() actualiceSetting = new EventEmitter<number>();
 
   ngOnInit(): void {
-    
+    this.CargarOpcionesDeBusqueda();
+  }
+
+  CargarOpcionesDeBusqueda(){
+    if (typeof this.optionsToSearch == "object" && !Array.isArray(this.optionsToSearch)) {
+      this.optionsToSearch = Object.keys(this.optionsToSearch).filter(e=> isNaN(+e)).map((key)=>{
+        return {
+          label: key.replace("_"," "),
+          value: this.optionsToSearch[key]
+        }
+      });
+      this.literalSearch = true;
+    }
+
+    if (typeof this.optionsToSearch == "boolean") {
+      this.optionsToSearch = [
+        {
+          label: 'Si',
+          value: true
+        },
+        {
+          label: 'No',
+          value: false
+        },
+      ];
+      this.literalSearch = true;
+    }
+
+  
+
   }
 
   
@@ -43,7 +74,7 @@ export class ColumnComponent implements OnInit{
       valuesToSearch: this.valuesToSearch,
       literalSearch: this.literalSearch,
       hideSearch: this.hideSearch,
-      optionsToSearch: this.optionsToSearch,
+      optionsToSearch: this.optionsToSearch as OptionToSearch[],
       type: this.type,
       title: this.title,
       currency:  this.currency,

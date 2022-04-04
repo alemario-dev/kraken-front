@@ -13,7 +13,6 @@ export enum INPUTTYPEFIELDS {
     SELECT_OPEN = 'SELECT_OPEN',
     PASSWORD = 'password',
     NUMBER = 'number',
-    PHONE = 'phone',
     EMAIL = 'email',
 }
 
@@ -32,4 +31,16 @@ export const ValidatorEmail:IkrakenValidator =  {
         return VALIDATE_FIELDS.INVALID
     },
     message: 'No es un correo valido'
+}
+
+export const minLengthValidator:IkrakenValidator =  {
+    function: (field, settings)=>{
+        if ((field+'').length<settings?.minLength || !field) {
+            return VALIDATE_FIELDS.INVALID;
+        }
+        
+        return VALIDATE_FIELDS.VALID;
+        
+    },
+    message: 'No cumple la longitud minima'
 }
