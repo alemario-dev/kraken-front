@@ -65,14 +65,14 @@
         
         <!-- CARGA DE DATOS-->
         <ng-container *ngFor="let data of data">
-          <tr [ngClass]="{'bg-secondary': isSelected(data)}" (click)="onPickrow(data)">
+          <tr [ngClass]="{'bg-secondary': isSelected(data)}">
 
             <td class="text-center" *ngIf="settings?.selectRows&&!settings?.onPickRow" style="min-width: 10px;">
               <input type="checkbox" [ngModel]="isSelected(data)" (ngModelChange)="selectRow(data)">
             </td>
 
             <ng-container *ngFor="let column of groupSettingSearch">
-              <td *ngIf="column.show" [ngSwitch]='column.type'>
+              <td *ngIf="column.show" [ngSwitch]='column.type' class="{{settings?.onPickRow? 'mousepointer' : ''}}" (click)="onPickrow(data)">
                 <ng-container *ngIf="column.transform">
                   <div [innerHTML]="middlewareTransform(column.transform, data, column)"></div>
                 </ng-container>
