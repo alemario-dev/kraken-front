@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnInit, Output, ViewChild,EventEmitter } from '@angular/core';
 import { IkrakenValidator, INPUTTYPEFIELDS, minLengthValidator, VALIDATE_FIELDS, ValidatorEmail } from './settingField.component';
 
 @Component({
@@ -26,6 +26,7 @@ export class KrakenFieldComponent implements OnInit, AfterContentInit{
   //infoValidadores
   @Input() minLength?: number;
   @Input() mustMatch?: string
+  @Output() onChange = new EventEmitter<any>();
   messageError:string = "";
   edit = false;
 
@@ -83,6 +84,10 @@ export class KrakenFieldComponent implements OnInit, AfterContentInit{
     if (this.minLength) {
       this.validators.push(minLengthValidator);
     }
+  }
+
+  chanceValue(value){
+    this.onChange.emit(value);
   }
 
 }
