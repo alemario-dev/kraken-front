@@ -13,6 +13,7 @@ export class FormComponent implements OnInit {
   @ContentChildren(KrakenFieldComponent, { descendants: true }) FieldsView: QueryList<KrakenFieldComponent> | undefined;
   @Input() readonly: boolean = false;
   @Input() onSubmit: any;
+  @Input() loading: boolean = false;
   
   constructor(
   ) { }

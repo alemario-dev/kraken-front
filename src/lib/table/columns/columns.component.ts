@@ -90,6 +90,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
   }
 
   getData(){
+    this.data = []
     this.dataClass.execute(this.currentPage, this.sizePage, this.actualQuery, this.actualSort).subscribe((e)=>{
       this.data = e;
       this.totalPages = this.dataClass.totalPages;

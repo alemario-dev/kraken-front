@@ -1,4 +1,7 @@
 <div class="card shadow rounded bg-secondary">
+  <div class="loading" *ngIf="loading">
+    <div class="loader"></div>
+  </div>
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col-8">
@@ -7,6 +10,7 @@
     </div>
   </div>
   <div class="card-body">
+
     <form (ngSubmit)="middleOnSumbit()">
       <ng-content></ng-content>
     </form>
