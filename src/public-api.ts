@@ -4,25 +4,25 @@
 
 export * from './lib/kraken.component';
 export * from './lib/kraken.module';
-export * from './lib/form/form.component';
+export * from './lib/components/form/form.component';
 
-export * from './lib/table/columns/columns.component';
-export * from './lib/table/columns/column/column.component';
-
-
-export * from './lib/table/columns/schema/KrakenArrayTable';
-export * from './lib/table/columns/schema/KrakenserviceTable';
-export * from './lib/table/columns/schema/schemaDataTable';
-export * from './lib/table/columns/settings/KrakenSettingsColumns';
-export * from './lib/table/footer/footer.component';
+export * from './lib/components/table/columns/columns.component';
+export * from './lib/components/table/columns/column/column.component';
 
 
-export * from './lib/table/table.component';
-export * from './lib/table/settingsTable.model';
-export * from './lib/table/header/header.component';
-export * from './lib/table/header/actions-buttons/actions-buttons.component';
+export * from './lib/interfaces/table/DataSchema/KrakenArrayTable';
+export * from './lib/interfaces/table/DataSchema/KrakenserviceTable';
+export * from './lib/interfaces/table/DataSchema/schemaDataTable';
+export * from './lib/interfaces/table/settings/KrakenSettingsColumns';
 
-export * from './lib/form/field/field.component';
-export * from './lib/form/field/settingField.component';
 
+export * from './lib/components/table/table.component';
+export * from './lib/components/table/settingsTable.model';
+export * from './lib/components/table/header/header.component';
+export * from './lib/components/table/header/actions-buttons/actions-buttons.component';
+
+export * from './lib/components/form/field/field.component';
+export * from './lib/interfaces/form/settingField.component';
+
+export * from './lib/services/createMetaFields.service'
 
