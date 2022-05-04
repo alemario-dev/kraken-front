@@ -1,13 +1,13 @@
 import { AfterContentInit, Component, ContentChildren, Input, OnInit, Output, QueryList } from '@angular/core';
 import {TYPESORT } from '../settingsTable.model';
 import { ColumnComponent } from './column/column.component';
-import { TableColumn } from './column/settingColumn';
-import { KrakenDataTable } from './schema/schemaDataTable';
-import { KrakenOptionsColumns, KrakenSettingsColumns } from './settings/KrakenSettingsColumns';
+import { TableColumn } from '../../../interfaces/table/settings/settingColumn';
+import { KrakenDataTable } from '../../../interfaces/table/DataSchema/schemaDataTable';
+import { KrakenOptionsColumns, KrakenSettingsColumns } from '../../../interfaces/table/settings/KrakenSettingsColumns';
 import * as XLSX from "xlsx";
 import * as FileSaver from "file-saver";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalExportComponent } from './modal-export/modal-export.component';
+import { ModalExportComponent } from '../../../modals/modal-export/modal-export.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
   _globalCurrency;
 
   @Input() dataClass: KrakenDataTable;
-  @Input() settings: KrakenSettingsColumns;
+  @Input() settings: KrakenSettingsColumns<any>;
 
   //para que el nombre del input sea mas corto se hizo de esta manera
   @Input() set currency(simbol){
@@ -33,7 +33,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
 
   data:any;
   groupSelected:any[] = [];
-  loading:boolean = false;
+  loading:boolean = true;
   groupsIds:string[];
   groupSettingSearch:any[];
   
@@ -90,10 +90,11 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
   }
 
   getData(){
-    this.data = []
+    this.loading = true;
     this.dataClass.execute(this.currentPage, this.sizePage, this.actualQuery, this.actualSort).subscribe((e)=>{
       this.data = e;
       this.totalPages = this.dataClass.totalPages;
+      this.loading = false;
     });
   }
 

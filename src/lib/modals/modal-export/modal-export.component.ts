@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TableComponent } from '../../table.component';
+import { TableComponent } from '../../components/table/table.component';
 
 @Component({
   selector: 'kraken-modal-export',

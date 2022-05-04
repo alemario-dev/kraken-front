@@ -24,7 +24,7 @@
             id="{{id}}" class="form-control"
             [placeholder]="placeholder?placeholder:''" [ngClass]="{ 'is-invalid': validator()&&keyTrigger }" [disabled]="block?block:edit"></textarea>
         </ng-container>
-        <div *ngIf="validator()&&keyTrigger" class="invalid-feedback">
+        <div *ngIf="validator()&&keyTrigger" class="invalid-feedback" style="background-color: transparent;">
             {{messageError?messageError: 'Hay un error!'}}
         </div>
     </div>

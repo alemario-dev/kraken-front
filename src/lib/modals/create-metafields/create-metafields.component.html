@@ -1,0 +1,75 @@
+<div class="modal-header">
+    <h4 class="modal-title">Campos adicionales</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <input [readOnly]="fieldSelected.protected" type="text" id="input-deviceFieldID" class="form-control" placeholder="Identificador" #inputFieldID="ngModel" [(ngModel)]="fieldSelected.id">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <input type="text" id="input-deviceFieldLabel" class="form-control" placeholder="Etiqueta" #inputFieldLabel="ngModel" [(ngModel)]="fieldSelected.label">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <ng-select class="form-control" [items]="inputTypes$" [searchable]="false"  placeholder="Tipo" #inputFieldType="ngModel" [(ngModel)]="fieldSelected.type">
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class="custom-control custom-control-alternative custom-checkbox mb-3">
+                  <input class="custom-control-input" id="inputFieldRequired" type="checkbox" #inputFieldRequired="ngModel" [(ngModel)]="fieldSelected.required">
+                  <label class="custom-control-label" for="inputFieldRequired">Obligatorio</label>
+                </div>
+              </div>
+        </div>
+        
+      </div>
+      <div class="row" *ngIf="fieldSelected.type=='SELECT_OPEN'||fieldSelected.type=='SELECT_CLOSE'">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <small>Presional enter o tab para agregar elementos</small>
+            <ng-select class="form-control" [items]="[]" [addTag]="true" placeholder="Valores" [multiple]="true" [selectOnTab]="true" [isOpen]="false"  #inputFieldValues="ngModel" [(ngModel)]="fieldSelected.values">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-right">
+            <button *ngIf="!isNewField" class="btn btn-icon btn-3 btn-danger" (click)="cancelSave()">
+              <span class="btn-inner--text">Cancelar</span>
+            </button>
+            <button class="btn btn-icon btn-3 btn-primary" (click)="addField(isNewField)">
+              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+              <span class="btn-inner--text">{{isNewField?'Agregar':'Listo'}}</span>
+            </button>
+            <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div> -->
+          </div>
+        </div>
+      </div>
+      <h4 class="b-4">Agregados</h4>
+      <span *ngIf="!(meta?.length>0)" class="text-sm text-warning">No se han agregado campos.</span>
+      <ul *ngIf="meta?.length>0">
+        <li *ngFor="let field of meta">
+          <span *ngIf="!field.protected" (click)="removeItemMeta(field)" class="badge badge-pill badge-danger" style="cursor: pointer;" placement="top" ngbTooltip="Eliminar el campo">X</span>&nbsp;
+          <span (click)="setAsUpdateField(field)" class="badge badge-pill badge-info" style="cursor: pointer;" placement="top" ngbTooltip="Editar el campo"><i class="ni ni-ruler-pencil"></i></span>&nbsp;
+          <span>{{field.label}}</span>&nbsp;
+          <span class="badge badge-info" style="cursor: pointer;" placement="top" ngbTooltip="Id">{{field.id}}</span>&nbsp;
+          <span class="badge badge-primary" style="cursor: pointer;" placement="top" ngbTooltip="Tipo">{{field.type.label}}</span>&nbsp;
+          <span *ngIf="field.required" class="badge badge-warning" style="cursor: pointer;" placement="top" ngbTooltip="Obligatorio">*</span>
+        </li>
+      </ul>
+</div>
+<div class="modal-footer">
+    <button [disabled]="loading" (click)="saveMeta()" class="btn btn-primary">Guardar</button>
+</div>

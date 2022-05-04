@@ -1,4 +1,4 @@
-import { TableColumn } from "./columns/column/settingColumn";
+import { TableColumn } from "../../interfaces/table/settings/settingColumn";
 
 export class TableSettings {
   title: string;

@@ -1,5 +1,5 @@
 import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, Input, OnInit, Output, QueryList } from '@angular/core';
-import { OptionToSearch, TableColumn, TYPESORT } from './settingColumn';
+import { OptionToSearch, TableColumn, TYPESORT } from '../../../../interfaces/table/settings/settingColumn';
 
 @Component({
   selector: 'kraken-colum',

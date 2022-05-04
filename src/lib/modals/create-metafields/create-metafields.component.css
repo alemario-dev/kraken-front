@@ -1,0 +1,10 @@
+.ng-select.form-control {
+    background-color: transparent;
+    border: none;
+    height: auto;
+    padding: 0;
+}
+.ng-select.form-control.is-invalid ::ng-deep .ng-select-container {
+    min-height: 0px;
+    border: solid 1px #fb6340;
+}

@@ -1,13 +1,13 @@
 import { Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
 import { KrakenFieldComponent } from './field/field.component';
-import { VALIDATE_FIELDS } from './field/settingField.component';
+import { VALIDATE_FIELDS } from '../../interfaces/form/settingField.component';
 
 @Component({
   selector: 'kraken-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit {
+export class FormComponent<TypeU> implements OnInit {
 
 
   @ContentChildren(KrakenFieldComponent, { descendants: true }) FieldsView: QueryList<KrakenFieldComponent> | undefined;
@@ -34,10 +34,9 @@ export class FormComponent implements OnInit {
     });
   }
 
-  public get getData(){
+  public get getData():TypeU{
     let objectToSend = {} as any;
     //validar formulario
-    console.log(this.ValidateForm());
     if (this.ValidateForm() == VALIDATE_FIELDS.INVALID) {
       return null;
     }
@@ -62,14 +61,11 @@ export class FormComponent implements OnInit {
 
   private ValidateForm(){
     //validadores individuales
-    const objectTrue  = this.FieldsView?.toArray().map(element => {
-      let resultado = element.validator();
-      // const resultDifMatch = this.FieldsView.toArray().filter(e=>(e.mustMatch == element.mustMatch)&&element.mustMatch).find((e)=>e.value != element.value);
-      // resultado = resultDifMatch? VALIDATE_FIELDS.INVALID : resultado
+    const objectTrue  = this.FieldsView?.toArray().map(componente => {
+      let resultado = componente.validator();
       if (resultado == VALIDATE_FIELDS.INVALID) {
-        element.keyTrigger = true;
+        componente.keyTrigger = true;
       }
-
       return resultado;
     });
 

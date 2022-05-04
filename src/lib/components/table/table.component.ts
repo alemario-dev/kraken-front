@@ -3,7 +3,7 @@ import { ColumnsComponent } from './columns/columns.component';
 import { ActionsButtonsComponent } from './header/actions-buttons/actions-buttons.component';
 import { HeaderComponent } from './header/header.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalExportComponent } from './columns/modal-export/modal-export.component';
+import { ModalExportComponent } from '../../modals/modal-export/modal-export.component';
 @Component({
   selector: 'kraken-table',
   templateUrl: './table.component.html',
@@ -78,6 +78,20 @@ export class TableComponent implements OnInit, AfterContentInit {
 
   exportPartial() {
     this.showDialog('partial');
+  }
+
+  _prevPage(){
+    if (this.currentPage == 1) return;
+    this.gotToPage(this.currentPage - 1);
+  }
+
+  _nextPage(){
+    if (this.currentPage == this.totalPages) return; 
+    this.gotToPage(this.currentPage + 1);
+  }
+
+  _goToPage(page: number){
+    this.gotToPage(page);
   }
 
 }

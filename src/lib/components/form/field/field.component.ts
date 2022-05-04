@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, ElementRef, Input, OnInit, Output, ViewChild,EventEmitter } from '@angular/core';
-import { IkrakenValidator, INPUTTYPEFIELDS, minLengthValidator, VALIDATE_FIELDS, ValidatorEmail } from './settingField.component';
+import { IkrakenValidator, INPUTTYPEFIELDS, minLengthValidator, VALIDATE_FIELDS, ValidatorEmail } from '../../../interfaces/form/settingField.component';
 
 @Component({
   selector: 'kraken-field',
@@ -22,6 +22,12 @@ export class KrakenFieldComponent implements OnInit, AfterContentInit{
   @Input() values?:any;
   @Input() bindLabel?:string;
   @Input() bindValue?:string;
+
+  //Inputs country, state, y city
+
+  @Input() country: string;
+  @Input() state: string;
+  @Input() city: string;
 
   //infoValidadores
   @Input() minLength?: number;

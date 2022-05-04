@@ -14,6 +14,7 @@ export enum INPUTTYPEFIELDS {
     PASSWORD = 'password',
     NUMBER = 'number',
     EMAIL = 'email',
+    COUNTRY = 'country'
 }
 
 export enum VALIDATE_FIELDS {
