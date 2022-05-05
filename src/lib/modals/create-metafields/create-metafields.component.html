@@ -46,14 +46,14 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="text-right">
-            <button *ngIf="!isNewField" class="btn btn-icon btn-3 btn-danger" (click)="cancelSave()">
+            <button *ngIf="!isNewField" class="btn btn-icon btn-3 btn-danger mx-2" (click)="cancelSave()">
               <span class="btn-inner--text">Cancelar</span>
             </button>
             <button class="btn btn-icon btn-3 btn-primary" (click)="addField(isNewField)">
               <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
               <span class="btn-inner--text">{{isNewField?'Agregar':'Listo'}}</span>
             </button>
-            <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div> -->
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0 text-center">{{error}}</div>
           </div>
         </div>
       </div>

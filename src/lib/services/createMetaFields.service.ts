@@ -11,10 +11,13 @@ export class ModalMetaFieldsService {
   constructor(private modalService: NgbModal) { }
 
   Open(): Observable<any>{
-    return new Observable((subscriber)=>{
-      const x = this.modalService.open(CreateMetafieldsComponent);
-      x.componentInstance.me = this.modalService;
-    });
+    return new Observable((suscriber)=>{
+      const modal = this.modalService.open(CreateMetafieldsComponent);
+      modal.componentInstance.me = this.modalService;
+      modal.componentInstance.save.subscribe((e)=>{
+        suscriber.next(e);
+      })
+    })
   }
 
 }

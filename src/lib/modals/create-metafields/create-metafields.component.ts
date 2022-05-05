@@ -48,8 +48,10 @@ export class CreateMetafieldsComponent implements OnInit {
 
   addField(isnew: Boolean){
     if(!this.fieldSelected.id||!this.fieldSelected.label||!this.fieldSelected.type){
-      
+      this.error = "Porfavor llene todos los campos"
+      return
     }
+    this.error = null;
     if(isnew){
       var re = / ?-?/g;
       this.fieldSelected.id=this.fieldSelected.id.trim().replace(re,"").toLowerCase();
