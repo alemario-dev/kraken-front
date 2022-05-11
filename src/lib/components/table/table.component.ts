@@ -29,6 +29,9 @@ export class TableComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit(): void {
     this.refresh();
+    this.colummnsInfo.totalPages.subscribe((pages)=>{
+      this.totalPages = pages;
+    })
   }
   ngOnInit(): void {
   }
@@ -36,7 +39,6 @@ export class TableComponent implements OnInit, AfterContentInit {
   refresh(){
     this.colummnsInfo.sizePage = this.sizePage;
     this.colummnsInfo.getData();
-    this.totalPages = this.colummnsInfo.totalPages;
   }
 
   gotToPage(page){

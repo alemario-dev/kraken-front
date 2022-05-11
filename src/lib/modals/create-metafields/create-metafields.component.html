@@ -20,7 +20,9 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="form-group">
-            <ng-select class="form-control" [items]="inputTypes$" [searchable]="false"  placeholder="Tipo" #inputFieldType="ngModel" [(ngModel)]="fieldSelected.type">
+            <ng-select class="form-control" [items]="inputTypes$" 
+            [searchable]="false"  placeholder="Tipo" #inputFieldType="ngModel" [(ngModel)]="fieldSelected.type"
+            bindLabel="label" bindValue="value">
             </ng-select>
           </div>
         </div>

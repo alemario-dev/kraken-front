@@ -35,6 +35,7 @@ export class CreateMetafieldsComponent implements OnInit {
 
   saveMeta(){
     this.save.emit(this.meta);
+    this.dismiss();
   }
 
   dismiss() {

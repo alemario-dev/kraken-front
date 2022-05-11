@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, Input, OnInit, Output, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList } from '@angular/core';
 import {TYPESORT } from '../settingsTable.model';
 import { ColumnComponent } from './column/column.component';
 import { TableColumn } from '../../../interfaces/table/settings/settingColumn';
@@ -9,6 +9,7 @@ import * as FileSaver from "file-saver";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalExportComponent } from '../../../modals/modal-export/modal-export.component';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'kraken-table-columns',
@@ -31,6 +32,8 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
   @Input() defaultQuery: any;
   @Input() defaultSort: any;
 
+  @Output() totalPages: EventEmitter<number> = new EventEmitter();
+
   data:any;
   groupSelected:any[] = [];
   loading:boolean = true;
@@ -40,7 +43,6 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
   dateRanges: any[];
   showSearch:boolean=false;
   //* INFO TABLE
-  totalPages: number = 0; // Número de paginas
   currentPage: number = 1; // Página actual
   
   actualSort: any;
@@ -93,7 +95,7 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
     this.loading = true;
     this.dataClass.execute(this.currentPage, this.sizePage, this.actualQuery, this.actualSort).subscribe((e)=>{
       this.data = e;
-      this.totalPages = this.dataClass.totalPages;
+      this.totalPages.emit(this.dataClass.totalPages);
       this.loading = false;
     });
   }
