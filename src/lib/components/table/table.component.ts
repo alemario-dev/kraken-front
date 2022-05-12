@@ -24,7 +24,7 @@ export class TableComponent implements OnInit, AfterContentInit {
 
     this.sizePage = 10;
     this.currentPage = 1;
-    this.totalPages = 999999;
+    this.totalPages = 1;
   }
 
   ngAfterContentInit(): void {
