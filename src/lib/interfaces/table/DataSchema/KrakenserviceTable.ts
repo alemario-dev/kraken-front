@@ -34,7 +34,7 @@ export class KrakenServiceTable extends KrakenDataTable {
 
     return new Observable(subscriber => {
         this.service.listWithOptions(currentPage, sizePage, query, sort).subscribe((res)=>{
-            this.totalPages = res?.totalPages? res.totalPages :  NaN;
+            this.totalPages = res?.totalPages? res.totalPages :  1;
             subscriber.next(res?.elements? res.elements:res);
         }, err=>{
           console.error(err);

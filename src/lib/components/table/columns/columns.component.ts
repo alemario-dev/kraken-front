@@ -138,10 +138,6 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
     return this.groupSelected.find((e)=> e==row);
   }
 
-  desctivateTHoptions = false;
-  contains1viewInOptions(data){
-    return this.settings?.options?.find((e)=>{e.showIf(data)});
-  }
 
   toggleSearchInputs() {
     this.showSearch = !this.showSearch;
@@ -173,7 +169,6 @@ export class ColumnsComponent implements OnInit, AfterContentInit {
   }
 
   Eventsort(setting){
-    console.log("ajijiji");
     //Limpiar las otras columnas
     // Establecer la funcionalidad a aplicar: asc, desc o none
     if (setting === TYPESORT.DEFAULT) setting = TYPESORT.ASC;
